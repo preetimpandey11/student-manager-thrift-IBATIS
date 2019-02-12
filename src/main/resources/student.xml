@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap  PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="student">
+
+    <typeAlias alias="STUDENT" type="com.student.Student"/>
+
+    <resultMap id="studentResultMap" class="STUDENT">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="standard" column="standard"/>
+        <result property="division" column="division"/>
+        <result property="score" column="score"/>
+    </resultMap>
+
+    <select id="getById" parameterClass="java.lang.Integer" resultMap="studentResultMap">
+        SELECT * FROM STUDENT WHERE ID = #value#
+    </select>
+
+    <select id="getAll" resultMap="studentResultMap">
+        SELECT * FROM STUDENT
+    </select>
+
+    <insert id="add" parameterClass="STUDENT">
+        INSERT INTO STUDENT (ID,NAME,STANDARD,DIVISION,SCORE)
+        VALUES(#id#,#name#,#standard#,#division#,#score#);
+    </insert>
+
+    <update id="update" parameterClass="STUDENT">
+        UPDATE STUDENT
+        SET NAME = #name#,
+        SCORE = #score#,
+        DIVISION = #division#,
+        STANDARD = #standard#
+        WHERE ID = #id#;
+    </update>
+
+    <delete id="deleteById" parameterClass="java.lang.Integer">
+        DELETE FROM STUDENT WHERE ID = #value#
+    </delete>
+
+</sqlMap>
